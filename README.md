@@ -1,6 +1,19 @@
-# TML-Group1: Reasoning SFT (ECE 6514 Project 1)
+# Project 1: Fine-tuning Qwen2.5-3B-Instruct on AceReason-1.1-SFT
 
-Michael Arthur, Kiara Klevar, Joseph Leonard, Gia Subedi
+SFT training of an LLM for improved reasoning. ECE 6514 Trustworthy Machine Learning, Virginia Tech, Fall 2026.
+
+## Authors
+
+**TML Group 1**
+
+| Name | GitHub |
+|---|---|
+| Michael Arthur | [@marthur24](https://github.com/marthur24) |
+| Kiara Klevar | [@kiarak425](https://github.com/kiarak425) |
+| Joseph Leonard | [@josephleonard04](https://github.com/josephleonard04) |
+| Gia Subedi | [@gsubediS](https://github.com/gsubediS) |
+
+## Overview
 
 We fine-tune `Qwen/Qwen2.5-3B-Instruct` (full-parameter SFT) on 15K samples picked from the 100K AceReason-1.1-SFT subset
 `redsgnaoh/acereason11_100k`, and try to beat a model trained on 15K random samples.
