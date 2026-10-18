@@ -1,0 +1,9 @@
+# Datasets live on Hugging Face, and checkpoints and eval outputs stay on /scratch, so keep them out of git.
+data/*.json
+!data/dataset_info.json
+outputs/
+saves/
+wandb/
+*.log
+__pycache__/
+.DS_Store
