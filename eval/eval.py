@@ -16,6 +16,7 @@ from utils.data_loader import load_data
 from utils.math_normalization import *
 from utils.grader import *
 import pickle
+import torch
 from math import comb
 
 # envs.VLLM_HOST_IP="0.0.0.0" or "127.0.0.1"
@@ -50,12 +51,24 @@ def parse_args():
     parser.add_argument("--dtype", default='auto', type=str)
     parser.add_argument("--completions_save_dir", default='./completions', type=str)
     parser.add_argument("--gpu_memory_utilization", default=0.96, type=float, help="fraction of GPU memory vLLM may use")
+    parser.add_argument("--swap_space", default=4, type=float, help="GiB of CPU RAM vLLM can swap paused requests into (vLLM default is 4)")
+    # With 1, the n samples are generated as n separate rounds of 1 sample each (same sampling, just slower).
+    # On our 24-48 GB GPUs vLLM 0.6.1 kept crashing on multi-sample requests ("assert len(seqs) == 1").
+    # Set it to 64 to get the original behavior.
+    parser.add_argument("--max_n_per_request", default=1, type=int, help="max samples per vLLM request")
     # parser.add_argument("--use_qwen_check", action="store_true")
     args = parser.parse_args()
     
     args.top_p = 1 if args.temperature == 0 else args.top_p # top_p must be 1 when using greedy 
     print(f"current stop list: {args.stop}")
     return args
+
+def gpu_memory_utilization(requested):
+    # On smaller GPUs (A30, L40S), 0.96 leaves only about 1 GB free, and our A30 jobs ran out of memory on
+    # very long answers. Keeping 12% free fixed it. Big GPUs keep the requested value.
+    if torch.cuda.get_device_properties(0).total_memory < 50 * 2**30:
+        return min(requested, 0.88)
+    return requested
 
 def get_conversation_prompt_by_messages(tokenizer, messages):
     text = tokenizer.apply_chat_template(
@@ -98,7 +111,7 @@ def infer(args):
     
     n_sampling = args.n_sampling
     factor = 1
-    for i in range(2, 65):
+    for i in range(2, args.max_n_per_request + 1):
         if n_sampling % i == 0:
             factor = i
     generation_epoch = n_sampling // factor
@@ -131,6 +144,11 @@ def infer(args):
         envs.VLLM_HOST_IP="0.0.0.0" or "127.0.0.1"
     print(f"available_gpus: {available_gpus}")
     tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, trust_remote_code=True)
+    # Our training env (newer transformers) saves the chat template in chat_template.jinja, but the
+    # transformers version here only reads it from tokenizer_config.json, so load it by hand if needed.
+    jinja = os.path.join(model_name_or_path, "chat_template.jinja")
+    if tokenizer.chat_template is None and os.path.exists(jinja):
+        tokenizer.chat_template = open(jinja).read()
     prompt_batch = []
     for example in tqdm(examples, total=len(examples)):
         # parse question and answer
@@ -153,8 +171,8 @@ def infer(args):
     llm = LLM(model=model_name_or_path, 
               tensor_parallel_size=len(available_gpus), 
               trust_remote_code=True, 
-            #   swap_space=60,
-              gpu_memory_utilization=args.gpu_memory_utilization,
+              swap_space=args.swap_space,
+              gpu_memory_utilization=gpu_memory_utilization(args.gpu_memory_utilization),
               )
     
     file_outputs = []
@@ -216,6 +234,9 @@ def infer(args):
 
             
     
+    # Make sure the output folder still exists. Empty folders on /scratch sometimes got cleaned up while a
+    # job was running, and the job then crashed here after hours of generation.
+    os.makedirs(os.path.dirname(out_file), exist_ok=True)
     temp_out_file = out_file + ".tmp"
     with open(temp_out_file, 'w', encoding='utf-8') as f:
         count = 0

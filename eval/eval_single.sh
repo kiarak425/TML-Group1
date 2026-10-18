@@ -37,6 +37,8 @@ export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0}
 MODEL=${MODEL:-Qwen/Qwen2.5-3B-Instruct}   # or /path/to/your/model
 OUTPUT_DIR=${OUTPUT_DIR:-./outputs}
 GPU_MEM_UTIL=${GPU_MEM_UTIL:-0.96}          # lower (e.g. 0.5) if the GPU is shared
+# SWAP_SPACE: GiB of CPU RAM vLLM can swap into. The default of 4 is enough since eval.py now sends
+# one sample per request. START_IDX/END_IDX evaluate only part of a benchmark (slurm/eval_all.sh uses them).
 mkdir -p "$OUTPUT_DIR"
 
 # Leaderboard setup: temperature 0.6, top-p 0.95, 8 samples, 32768 max tokens
@@ -46,8 +48,8 @@ python eval.py \
 --prompt_type "qwen-instruct" \
 --temperature 0.6 \
 --top_p 0.95 \
---start_idx 0 \
---end_idx -1 \
+--start_idx "${START_IDX:-0}" \
+--end_idx "${END_IDX:--1}" \
 --n_sampling 8 \
 --k 1 \
 --split "test" \
@@ -57,4 +59,5 @@ python eval.py \
 --output_dir "$OUTPUT_DIR" \
 --completions_save_dir "$OUTPUT_DIR/completions" \
 --gpu_memory_utilization "$GPU_MEM_UTIL" \
-2>&1 | tee "$OUTPUT_DIR/log_${DATA}.txt"
+--swap_space "${SWAP_SPACE:-4}" \
+2>&1 | tee "$OUTPUT_DIR/log_${DATA}${START_IDX:+_s$START_IDX}.txt"
