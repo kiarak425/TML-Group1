@@ -1,0 +1,29 @@
+{
+  "random_15k": {
+    "file_name": "random_15k.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "advanced_15k": {
+    "file_name": "advanced_15k.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  },
+  "concise_15k": {
+    "file_name": "concise_15k.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+  }
+}
