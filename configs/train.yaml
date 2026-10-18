@@ -1,0 +1,45 @@
+# Training config for all our runs. slurm/train.sh fills in dataset, output_dir, run_name and
+# gradient_accumulation_steps (so the global batch is 8 no matter how many GPUs the job gets).
+# These are the assignment's suggested hyperparameters (global batch 8, lr 5e-6, 3 epochs, cosine, no warmup).
+# The only changes are for memory and speed: no CPU offload, PyTorch attention instead of flash-attn,
+# and Liger kernels.
+
+### model
+model_name_or_path: Qwen/Qwen2.5-3B-Instruct
+
+### method
+stage: sft
+do_train: true
+finetuning_type: full
+deepspeed: configs/ds_z3_config.json
+flash_attn: sdpa
+enable_liger_kernel: true        # computes the loss without building the full 16K x 152K logits tensor,
+                                 # which is what lets 16K-token samples fit on a 48 GB L40S
+
+### dataset
+dataset: random_15k
+dataset_dir: data
+template: qwen
+cutoff_len: 16384
+preprocessing_num_workers: 16
+overwrite_cache: true
+
+### output
+output_dir: saves/train
+save_strategy: epoch
+save_only_model: true            # only weights + tokenizer, so any checkpoint can be loaded by vLLM directly
+logging_steps: 10
+plot_loss: true
+overwrite_output_dir: true
+report_to: wandb
+
+### train
+per_device_train_batch_size: 1
+gradient_accumulation_steps: 8
+learning_rate: 5.0e-6
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.0
+bf16: true
+ddp_timeout: 180000000
+seed: 42
