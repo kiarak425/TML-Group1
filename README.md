@@ -6,12 +6,12 @@ SFT training of an LLM for improved reasoning. ECE 6514 Trustworthy Machine Lear
 
 **TML Group 1**
 
-| Name | GitHub |
+| Name | GitHub | HuggingFace |
 |---|---|
-| Michael Arthur | [@marthur24](https://github.com/marthur24) |
-| Kiara Klevar | [@kiarak425](https://github.com/kiarak425) |
-| Joseph Leonard | [@josephleonard04](https://github.com/josephleonard04) |
-| Gia Subedi | [@gsubediS](https://github.com/gsubediS) |
+| Michael Arthur | [@marthur24](https://github.com/marthur24) | [@marthur24](https://huggingface.co/marthur24) |
+| Kiara Klevar | [@kiarak425](https://github.com/kiarak425) | | 
+| Joseph Leonard | [@josephleonard04](https://github.com/josephleonard04) | | 
+| Gia Subedi | [@gsubediS](https://github.com/gsubediS) | | 
 
 ## Overview
 
