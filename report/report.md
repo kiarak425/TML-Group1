@@ -81,7 +81,11 @@ Advanced-v2 keeps filters 1–5 from Advanced-v1 but swaps the difficulty floor 
 
 The biggest single improvement we measured came from going from epoch 2 to epoch 3 (§7). So for Advanced-v3 we kept exactly the Advanced-v2 data and settings and trained for 5 epochs instead of 3.
 
-### 4.5 Resulting datasets
+### 4.5 Qwen2.5-3b-diversity15k-lora, 1 epoch
+
+This model was trained using a dataset derived from running the acereason dataset through the DataSelection_Diversity_full_run.ipynb file. It was trained in Colab using an A100 due to time constraints before the project deadline was extended. The DataSelection-Diversity-full_run.ipynb file creates 100 clusters of embeddings questions from the dataset to ensure that the resulting selection is sufficiently diverse. The model was only trained for 1 epoch due to budget constraints. 
+
+### 4.6 Resulting datasets
 
 | | Random | Advanced-v1 | Advanced-v2 / Advanced-v3 |
 |---|---:|---:|---:|
