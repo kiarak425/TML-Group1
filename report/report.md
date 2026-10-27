@@ -22,7 +22,7 @@ We fine-tune `Qwen/Qwen2.5-3B-Instruct` with full-parameter SFT on 15,000 sample
 |---|---|
 | Code | https://github.com/kiarak425/TML-Group1 |
 | Datasets | [random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k), [advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) (Advanced-v1), [concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) (Advanced-v2 and Advanced-v3) |
-| Models | [advanced-v3](https://huggingface.co/josephl04/ece6514-p1-advanced-v3) (submitted), [random](https://huggingface.co/josephl04/ece6514-p1-random), [advanced-v1](https://huggingface.co/josephl04/ece6514-p1-advanced-v1) |
+| Models | [advanced-v3](https://huggingface.co/josephl04/ece6514-p1-advanced-v3) (submitted), [random](https://huggingface.co/josephl04/ece6514-p1-random), [advanced-v1](https://huggingface.co/josephl04/ece6514-p1-advanced-v1), [Qwen LORA](https://huggingface.co/marthur24/qwen2.5-3b-finetuned) |
 
 ## 2. Evaluation setup
 
@@ -81,7 +81,7 @@ Advanced-v2 keeps filters 1–5 from Advanced-v1 but swaps the difficulty floor 
 
 The biggest single improvement we measured came from going from epoch 2 to epoch 3 (§7). So for Advanced-v3 we kept exactly the Advanced-v2 data and settings and trained for 5 epochs instead of 3.
 
-### 4.5 Qwen2.5-3b-diversity15k-lora, 1 epoch (marthur24 Hugging Face)
+### 4.5 Qwen LORA, 1 epoch (marthur24 Hugging Face)
 
 This model was trained using a dataset derived from running the acereason dataset through the DataSelection_Diversity_full_run.ipynb file. It was trained in Colab using an A100 due to time constraints before the project deadline was extended. The DataSelection-Diversity-full_run.ipynb file creates 100 clusters of embeddings questions from the dataset to ensure that the resulting selection is sufficiently diverse. The model was only trained for 1 epoch due to budget constraints, and used LORA due to resource constraints. Unsurprisingly, this model performed the worst in evaluation. It was trained for 1 epoch, and it did not use full fine-tuning. The hyperparameters for this model can be found in scripts/Lora_Train_1_epoch.ipynb.
 
@@ -129,7 +129,7 @@ Pass@1 (%), mean over 8 samples:
 |---|---|---|---|---|---|---|---|---|---|
 | Base | 7.9 | 38.8 | 7.9 | **28.7** | 21.9 | 65.5 | **22.3** | 28.1 | 27.6 |
 | Random | 6.7 | 38.4 | 12.9 | 19.3 | 30.3 | 63.9 | 18.2 | 28.0 | 27.2 |
-| Qwen3b-Lora | 0.0 | 9.4 | 0.8 | 14.8 | 3.9 | 34.4 |8.6 | 9.6 | 10.2 |
+| Qwen LORA | 0.0 | 9.4 | 0.8 | 14.8 | 3.9 | 34.4 |8.6 | 9.6 | 10.2 |
 | Advanced-v1 | 7.1 | 41.6 | 12.9 | 20.1 | 28.2 | 66.5 | 19.9 | 31.6 | 28.5 |
 | Advanced-v2 | 7.5 | 43.1 | 11.7 | 21.5 | 30.1 | 66.7 | 20.8 | 29.9 | 28.9 |
 | **Advanced-v3** | **10.0** | **46.2** | 12.9 | 26.4 | **34.0** | **68.5** | 21.9 | **32.9** | **31.6** |
@@ -142,7 +142,7 @@ Pass@8 (%), at least one of 8 correct:
 |---|---|---|---|---|---|---|---|---|---|
 | Base | 23.3 | 70.0 | 26.7 | 73.7 | 53.3 | 84.8 | **39.0** | 52.1 | 52.9 |
 | Random | 23.3 | 67.5 | 36.7 | 68.7 | 68.8 | 86.0 | 34.9 | 51.4 | 54.7 |
-| Qwen3b-Lora | 0.0 | 32.5 | 3.3 | 58.6 | 20.1 | 63.4 | 23.5 | 27.1 | 28.6 |
+| Qwen LORA | 0.0 | 32.5 | 3.3 | 58.6 | 20.1 | 63.4 | 23.5 | 27.1 | 28.6 |
 | Advanced-v1 | 23.3 | 75.0 | 43.3 | 73.2 | 67.3 | **90.0** | 36.8 | 56.9 | 58.2 |
 | Advanced-v2 | 23.3 | 72.5 | **46.7** | 73.2 | 65.8 | 88.8 | 35.3 | 55.7 | 57.7 |
 | **Advanced-v3** | 23.3 | **80.0** | 40.0 | **76.8** | **70.9** | 89.0 | 37.5 | **59.4** | **59.6** |
@@ -155,7 +155,7 @@ No-answer rate (%), samples with no `\boxed{}` at all. Lower is better; Base is 
 |---|---|---|---|---|---|---|---|---|---|
 | Base | **6.7** | **1.2** | 4.2 | **0.6** | 5.8 | **0.4** | **0.2** | **1.6** | **2.6** |
 | Random | 37.9 | 18.8 | 21.2 | 26.3 | 7.9 | 9.1 | 14.9 | 19.0 | 19.4 |
-| Qwen3b-Lora | 58.8 | 49.4 | 40.8 | 31.7 | 71.0 | 30.2 | 46.5 | 49.1 | 47.2 |
+| Qwen LORA | 58.8 | 49.4 | 40.8 | 31.7 | 71.0 | 30.2 | 46.5 | 49.1 | 47.2 |
 | Advanced-v1 | 35.4 | 15.3 | 20.8 | 26.0 | 8.2 | 7.5 | 13.3 | 18.6 | 18.1 |
 | Advanced-v2 | 30.0 | 9.7 | 11.2 | 18.0 | 6.5 | 5.5 | 10.6 | 13.5 | 13.1 |
 | **Advanced-v3** | 9.2 | 2.5 | **3.3** | 3.5 | **0.9** | 2.0 | 3.0 | 4.8 | 3.6 |
