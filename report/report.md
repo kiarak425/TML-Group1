@@ -119,7 +119,7 @@ Random and Advanced-v1 took about 27–29 hours for three epochs, which doesn't 
 
 ## 6. Results
 
-Advanced-v3 (bold row) is our submitted model. In each column the best value is in bold if no other model ties it.
+Advanced-v3 (bold row) is our submitted model. In each column the best value is in bold if no other model ties it. Qwen2.5-3b-diversity15k-lora was omitted from charts for poor performance.
 
 ![Average Pass@1 on eight reasoning benchmarks](pass1.png)
 
