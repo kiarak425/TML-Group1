@@ -189,6 +189,8 @@ Each configuration was trained only once (seed 42), because queue times on the s
 
 We use response length as a stand-in for difficulty. Measuring the base model's pass rate on each problem would be a better signal, but it would take several GPU-days of generation. The `\boxed{}` and proof filters are regex heuristics that we checked on a 500-row sample, not on the full pool. Finally, epoch 3 of Random and Advanced-v1 restarted the optimizer state (§5).
 
+While working on the projects, there were many limitations we all faced. The main limitation was working with the GPU to run the batch jobs. The time to get the tests going and how long they executed were two challenges that we faced.  
+
 ## 9. Reproducing
 
 The README walks through every step. In short, `scripts/select_data.py` builds the datasets, `slurm/train.sh` trains, `slurm/eval_all.sh` runs the evaluation, and `scripts/summarize.py` produces the tables. The data selection is deterministic (seed 42), and the unit tests run with `python -m pytest tests`.
