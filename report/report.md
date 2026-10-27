@@ -83,7 +83,7 @@ The biggest single improvement we measured came from going from epoch 2 to epoch
 
 ### 4.5 Qwen2.5-3b-diversity15k-lora, 1 epoch
 
-This model was trained using a dataset derived from running the acereason dataset through the DataSelection_Diversity_full_run.ipynb file. It was trained in Colab using an A100 due to time constraints before the project deadline was extended. The DataSelection-Diversity-full_run.ipynb file creates 100 clusters of embeddings questions from the dataset to ensure that the resulting selection is sufficiently diverse. The model was only trained for 1 epoch due to budget constraints, and used LORA due to resource constraints. Unsurprisingly, this model performed the worst in evaluation. It was trained for 1 epoch, and it did not use full fine-tuning. 
+This model was trained using a dataset derived from running the acereason dataset through the DataSelection_Diversity_full_run.ipynb file. It was trained in Colab using an A100 due to time constraints before the project deadline was extended. The DataSelection-Diversity-full_run.ipynb file creates 100 clusters of embeddings questions from the dataset to ensure that the resulting selection is sufficiently diverse. The model was only trained for 1 epoch due to budget constraints, and used LORA due to resource constraints. Unsurprisingly, this model performed the worst in evaluation. It was trained for 1 epoch, and it did not use full fine-tuning. The hyperparameters for this model can be found in scripts/Lora_Train_1_epoch.ipynb.
 
 ### 4.6 Resulting datasets
 
