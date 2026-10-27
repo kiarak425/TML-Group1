@@ -21,7 +21,7 @@ We fine-tune `Qwen/Qwen2.5-3B-Instruct` with full-parameter SFT on 15,000 sample
 | | Link |
 |---|---|
 | Code | https://github.com/kiarak425/TML-Group1 |
-| Datasets | [random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k), [advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) (Advanced-v1), [concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) (Advanced-v2 and Advanced-v3), [diversity15k] (https://huggingface.co/datasets/marthur24/diversity15k/tree/main) (Qwen LORA) |
+| Datasets | [random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k), [advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) (Advanced-v1), [concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) (Advanced-v2 and Advanced-v3),[diversity15k](https://huggingface.co/datasets/marthur24/diversity15k) (Qwen LORA) |
 | Models | [advanced-v3](https://huggingface.co/josephl04/ece6514-p1-advanced-v3) (submitted), [random](https://huggingface.co/josephl04/ece6514-p1-random), [advanced-v1](https://huggingface.co/josephl04/ece6514-p1-advanced-v1), [Qwen LORA](https://huggingface.co/marthur24/qwen2.5-3b-finetuned) |
 
 ## 2. Evaluation setup
