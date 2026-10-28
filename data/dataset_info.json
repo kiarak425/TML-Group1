@@ -25,5 +25,24 @@
       "response": "output",
       "system": "system"
     }
+  },
+  "diversity_50": {
+    "file_name": "diversity_50.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
+     },
+  "diversity_100": {
+    "file_name": "diversity_100.json",
+    "columns": {
+      "prompt": "instruction",
+      "query": "input",
+      "response": "output",
+      "system": "system"
+    }
   }
-}
+  }
+
