@@ -218,7 +218,7 @@ Both models had pretty high no answer rates, and when inspected, the incomplete 
 Once our longer training runs are completed, we plan to evaluate them using the same benchmarks and compare their performance against the random baseline as well as the other advanced data selection strategy we tested. 
 
 
-## 8. Limitations
+## 8. Limitations and Improvements
 
 Each configuration was trained only once (seed 42), because queue times on the shared cluster made repeats impractical. Differences under about 1 point are therefore within run-to-run noise, and AIME and CN-Math have only 30 questions each, so a single question is worth 3.3 points.
 
