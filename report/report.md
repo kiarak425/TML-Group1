@@ -17,6 +17,7 @@ We fine-tune `Qwen/Qwen2.5-3B-Instruct` with full-parameter SFT on 15,000 sample
 | **Advanced-v1** | 15K rows that pass our eval-aligned filters (§4.2) | 3 |
 | **Advanced-v2** | 15K rows from the same filters, short solutions only (§4.3) | 3 |
 | **Advanced-v3** (submitted) | the Advanced-v2 data (§4.4) | 5 |
+| Qwen LORA | diversity15k dataset| 1|
 
 | | Link |
 |---|---|
