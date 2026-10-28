@@ -11,7 +11,7 @@ SFT training of an LLM for improved reasoning. ECE 6514 Trustworthy Machine Lear
 | Michael Arthur | [@marthur24](https://github.com/marthur24) | [@marthur24](https://huggingface.co/marthur24) |
 | Kiara Klevar | [@kiarak425](https://github.com/kiarak425) | [@kiarak04](https://huggingface.co/kiarak04) |
 | Joseph Leonard | [@josephleonard04](https://github.com/josephleonard04) | [@josephl04](https://huggingface.co/josephl04)| 
-| Gia Subedi | [@gsubediS](https://github.com/gsubediS) | [gsubedi](https://huggingface.co/gsubedi)| 
+| Gia Subedi | [@gsubediS](https://github.com/gsubediS) | [@gsubedi](https://huggingface.co/gsubedi)| 
 
 ## Overview
 
