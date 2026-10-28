@@ -206,10 +206,10 @@ Due to ARC GPU resources being limited, our models trained on Diversity 50 and D
 
 While these 2 epoch runs don’t directly correspond to the 3 epoch Random 15k run, we would still like to present the evaluation results using the same evaluation benchmarks described in section 2. 
 
-
-Model | Epochs | Average Pass@1(%) | Average Pass@8(%) | No-answer rate
-Diversity 50 | 2 | 25.0 | 51.7 | 26.4
-Diversity 100 | 2 | 24.3 | 50.2 | 30.8
+| Model | Epochs | Average Pass@1(%) | Average Pass@8(%) | No-answer rate | 
+|----|---:|---:|---:|---:|
+| Diversity 50 | 2 | 25.0 | 51.7 | 26.4 |
+| Diversity 100 | 2 | 24.3 | 50.2 | 30.8 | 
 
 Diversity 50 achieved slightly higher average Pass@1 and Pass@8 scores than Diversity 100, and a lower no answer rate. However, these scores are close enough that we cannot determine a clear advantage between the two.
 
