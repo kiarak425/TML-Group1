@@ -86,7 +86,21 @@ The biggest single improvement we measured came from going from epoch 2 to epoch
 
 This model was trained using a dataset derived from running the acereason dataset through the DataSelection_Diversity_full_run.ipynb file. It was trained in Colab using an A100 due to time constraints before the project deadline was extended. The DataSelection-Diversity-full_run.ipynb file creates 100 clusters of embeddings questions from the dataset to ensure that the resulting selection is sufficiently diverse. The model was only trained for 1 epoch due to budget constraints, and used LORA due to resource constraints. Unsurprisingly, this model performed the worst in evaluation. It was trained for 1 epoch, and it did not use full fine-tuning. The hyperparameters for this model can be found in scripts/Lora_Train_1_epoch.ipynb.
 
-### 4.6 Resulting datasets
+### 4.6 Diversity based sampling
+
+To test how the model would perform with a diverse dataset, we also investigated semantic diversity as a data selection strategy. In this approach, we didn’t filter based on length or answer format. We solely focused on selecting a subset of data that represented various question types that were present in the data. Our hypothesis was that diversity based sampling would improve the model’s generalization.
+
+For this, following the suggested steps in Step 7 of the project instructions, we first generated embeddings for all 100k questions in the AceReasons dataset. We used all-MiniLM-L6-v2 to generate the embeddings. We then used KMeans clustering to create groups of questions based on their semantic similarity. To experiment if a different number of clusters would influence model performance, we created two different datasets using 50 and 100 clusters respectively.
+
+Diversity 50 : 50 clusters, with 300 questions sampled from each cluster
+Diversity 100: 100 clusters, with 150 questions sampled from each cluster
+
+Both of these datasets contain 15,000 examples and use balanced sampling to encourage equal representation of various question types.
+
+These datasets are published on HuggingFace.
+
+
+### 4.7 Resulting datasets
 
 | | Random | Advanced-v1 | Advanced-v2 / Advanced-v3 |
 |---|---:|---:|---:|
@@ -183,6 +197,24 @@ No-answer rate (%), samples with no `\boxed{}` at all. Lower is better; Base is 
 Part of this jump comes from the cosine schedule decaying to zero during epoch 3. Still, it is what led us to Advanced-v3, which uses the Advanced-v2 data for 5 epochs instead of 3. Advanced-v3 is our best model on both metrics: average pass@1 is 31.6 (Advanced-v2: 28.9), pass@8 is 59.6 (57.7), and unfinished answers drop to 3.6% (13.1%). It even recovers on GPQA, reaching 26.4 pass@1 compared with 21.5 for Advanced-v2, although its training data is pure math. Among the fine-tuned models it is the best or tied for best on all 8 benchmarks for pass@1.
 
 Advanced-v3 learned to finish its answers *without* cutting its reasoning short. Its AIME pass@1 is 10.0, the best of all models, with only 9% unfinished (Advanced-v2: 30%). Our reading is that small models need more passes over long-reasoning data before they reliably conclude, and the assignment's default of 3 epochs was not enough.
+
+**Preliminary Diversity Dataset Results**
+
+Due to ARC GPU resources being limited, our models trained on Diversity 50 and Diversity 100 datasets only trained for 2 epochs as they exceeded the 24 hour limit before they reached epoch 3. We have requested longer runs for both but they have been queued for October 31st which is after our deadline. 
+
+While these 2 epoch runs don’t directly correspond to the 3 epoch Random 15k run, we would still like to present the evaluation results using the same evaluation benchmarks described in section 2. 
+
+
+Model | Epochs | Average Pass@1(%) | Average Pass@8(%) | No-answer rate
+Diversity 50 | 2 | 25.0 | 51.7 | 26.4
+Diversity 100 | 2 | 24.3 | 50.2 | 30.8
+
+Diversity 50 achieved slightly higher average Pass@1 and Pass@8 scores than Diversity 100, and a lower no answer rate. However, these scores are close enough that we cannot determine a clear advantage between the two.
+
+Both models had pretty high no answer rates, and when inspected, the incomplete answers were repetitive or excessively long without reaching a final boxed output. However, this is similar to what we observed with our other models at the 2 epoch stage, and might indicate lack of sufficient training rather than anything specific about the data selection strategy. We saw a drop in no answer rates significantly for our other models when training for 3 or 5 epochs, and we hypothesize that longer training may improve the no answer rates for the diversity datasets as well.
+
+Once our longer training runs are completed, we plan to evaluate them using the same benchmarks and compare their performance against the random baseline as well as the other advanced data selection strategy we tested. 
+
 
 ## 8. Limitations
 
