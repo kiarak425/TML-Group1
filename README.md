@@ -47,7 +47,7 @@ at temperature 0.6, top-p 0.95 and up to 32K tokens. Per-benchmark tables are in
 | Random dataset | [josephl04/ece6514-p1-random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k) |
 | Advanced dataset (used for Advanced-v2 and Advanced-v3) | [josephl04/ece6514-p1-concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) |
 | Advanced-v1 dataset | [josephl04/ece6514-p1-advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) |
-| Diversity 50 & 100 - 15k | [AceReasons-Diversity-15k](https://huggingface.co/datasets/gsubedi/AceReasons-diversity-15k) |
+| Diversity 50 & 100 - 15k | [gsubedi/AceReasons-Diversity-15k](https://huggingface.co/datasets/gsubedi/AceReasons-diversity-15k) |
 
 ## What's in the repo
 
