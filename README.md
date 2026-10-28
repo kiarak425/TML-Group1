@@ -11,7 +11,7 @@ SFT training of an LLM for improved reasoning. ECE 6514 Trustworthy Machine Lear
 | Michael Arthur | [@marthur24](https://github.com/marthur24) | [@marthur24](https://huggingface.co/marthur24) |
 | Kiara Klevar | [@kiarak425](https://github.com/kiarak425) | [@kiarak04](https://huggingface.co/kiarak04) |
 | Joseph Leonard | [@josephleonard04](https://github.com/josephleonard04) | [@josephl04](https://huggingface.co/josephl04)| 
-| Gia Subedi | [@gsubediS](https://github.com/gsubediS) | | 
+| Gia Subedi | [@gsubediS](https://github.com/gsubediS) | [gsubedi](https://huggingface.co/gsubedi)| 
 
 ## Overview
 
@@ -47,12 +47,14 @@ at temperature 0.6, top-p 0.95 and up to 32K tokens. Per-benchmark tables are in
 | Random dataset | [josephl04/ece6514-p1-random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k) |
 | Advanced dataset (used for Advanced-v2 and Advanced-v3) | [josephl04/ece6514-p1-concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) |
 | Advanced-v1 dataset | [josephl04/ece6514-p1-advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) |
+| Diversity 50 & 100 - 15k | [AceReasons-Diversity-15k](https://huggingface.co/datasets/gsubedi/AceReasons-diversity-15k) |
 
 ## What's in the repo
 
 | Path | What it does |
 |---|---|
 | `scripts/select_data.py` | Builds the 15K datasets (`random`, `advanced`, `concise`) and can push them to Hugging Face |
+| `scripts/Diversity_data_selection.ipynb` | Generates the 15K Diversity Datasets with K-Means Clustering (`Diversity 50 `, `Diversity 100`) and balanced sampling |
 | `configs/train.yaml`, `configs/ds_z3_config.json` | LLaMA-Factory training config (DeepSpeed ZeRO-3) |
 | `data/dataset_info.json` | Tells LLaMA-Factory how to read our datasets, including the `system` column |
 | `slurm/train.sh` | Slurm job for training |
@@ -83,6 +85,9 @@ python scripts/select_data.py --strategy random   --push $HF_USER/ece6514-p1-ran
 python scripts/select_data.py --strategy advanced --push $HF_USER/ece6514-p1-advanced-15k   # Advanced-v1
 python scripts/select_data.py --strategy concise  --push $HF_USER/ece6514-p1-concise-15k    # Advanced-v2 and Advanced-v3
 ```
+**2.1. Generate the diversity datasets**
+Open [`scripts/Diversity_data_selection.ipynb`](scripts/Diversity_data_selection.ipynb) in Google Colab.
+Run the notebook cells in order to generate the diversity 50 and diversity 100 datasets. 
 
 **3. Train.** Models are saved to `/scratch/$USER/p1/models/<name>`.
 ```bash
