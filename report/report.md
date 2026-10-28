@@ -18,12 +18,14 @@ We fine-tune `Qwen/Qwen2.5-3B-Instruct` with full-parameter SFT on 15,000 sample
 | **Advanced-v2** | 15K rows from the same filters, short solutions only (§4.3) | 3 |
 | **Advanced-v3** (submitted) | the Advanced-v2 data (§4.4) | 5 |
 | Qwen LORA | diversity15k dataset| 1|
+|**Diversity 50** | 15k samples selected using 50 semantic clusters |2|
+|**Diversity 100**| 15k samples selected using 100 semantic clusters| 2|
 
 | | Link |
 |---|---|
 | Code | https://github.com/kiarak425/TML-Group1 |
 | Datasets | [random-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-random-15k), [advanced-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-advanced-15k) (Advanced-v1), [concise-15k](https://huggingface.co/datasets/josephl04/ece6514-p1-concise-15k) (Advanced-v2 and Advanced-v3),[diversity15k](https://huggingface.co/datasets/marthur24/diversity15k) (Qwen LORA) |
-| Models | [advanced-v3](https://huggingface.co/josephl04/ece6514-p1-advanced-v3) (submitted), [random](https://huggingface.co/josephl04/ece6514-p1-random), [advanced-v1](https://huggingface.co/josephl04/ece6514-p1-advanced-v1), [Qwen LORA](https://huggingface.co/marthur24/qwen2.5-3b-finetuned) |
+| Models | [advanced-v3](https://huggingface.co/josephl04/ece6514-p1-advanced-v3) (submitted), [random](https://huggingface.co/josephl04/ece6514-p1-random), [advanced-v1](https://huggingface.co/josephl04/ece6514-p1-advanced-v1), [Qwen LORA](https://huggingface.co/marthur24/qwen2.5-3b-finetuned) | [Diversity50 & Diversity100 - 15k](https://huggingface.co/datasets/gsubedi/AceReasons-diversity-15k)
 
 ## 2. Evaluation setup
 
